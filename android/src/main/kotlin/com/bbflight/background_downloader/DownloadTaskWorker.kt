@@ -97,14 +97,10 @@ class DownloadTaskWorker(applicationContext: Context, workerParams: WorkerParame
                 var resumeIsAllowed = false
                 if (eTag == null || eTagHeader == null) {
                     resumeIsAllowed = true
-                } else if (eTag.startsWith("W/")) {
-                    if (allowWeakETag && eTagHeader?.startsWith("W/") == true) {
-                        resumeIsAllowed = true
-                    }
+                } else if (eTag?.subSequence(0, 1) == "W/") {
+                    resumeIsAllowed = allowWeakETag && eTagHeader?.subSequence(0, 1) == "W/"
                 } else {
-                    if (eTag == eTagHeader) {
-                        resumeIsAllowed = true
-                    }
+                    resumeIsAllowed = eTag == eTagHeader
                 }
                 if (!resumeIsAllowed) {
                     deleteTempFile()
