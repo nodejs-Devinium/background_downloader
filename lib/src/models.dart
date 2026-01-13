@@ -628,6 +628,9 @@ final class Config {
   /// Config string for holding queue
   static const holdingQueue = 'holdingQueue';
 
+  /// Config string for allow weak ETag
+  static const allowWeakETag = 'allowWeakETag';
+
   /// Config string for skip existing files
   static const skipExistingFiles = 'skipExistingFiles';
 
